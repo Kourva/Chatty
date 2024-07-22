@@ -47,10 +47,7 @@ def zephyr_chat(prompt: str,
     )
 
     # Initialize Zephyr response
-    response: str = "Kowshan Zephyr:\n\n"
-
-    # Send info notification
-    gr.Info("シ Kowshan Zephyr is tinking...", 2)
+    response: str = "〔 Kowshan Zephyr 〕\n\n"
 
     # Send request to client
     for chunk in CLIENT.chat_completion(
@@ -68,8 +65,8 @@ def zephyr_chat(prompt: str,
 # Initialize chat layout
 demo: ChatInterface = ChatInterface(
     fn=zephyr_chat,
-    title="Κσωshαπ Zephyr ⍨",
-    description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!",
+    title="Κσωshαπ ζερhyr ⍨",
+    description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!\nDeveloped with 🐍 by Kourva (Kozyol)",
     multimodal=False,
     submit_btn="ッ Ask",
     stop_btn="✕ Stop",
