@@ -1,51 +1,75 @@
-# Imports
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Standard libraries
+from typing import Dict, List, Tuple, NoReturn
+
+# 3rd-Party libraries
 import gradio as gr
+from gradio import ChatInterface
 from huggingface_hub import InferenceClient
 
-# Client
-client = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
+# Local libraries
 
-# Chat GPT generator
-def respond(message,
-            history: list[tuple[str, str]],
-            system_message,
-            max_tokens,
-            temperature,
-            top_p):
-    # System message
-    messages = [{"role": "system", "content": system_message}]
 
-    # History
+# Initialize chat client
+CLIENT: InferenceClient = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
+
+# Zephyr chat generator function
+def zephyr_chat(prompt: str,
+               history: List[Tuple[str, str]],
+               system_message: str,
+               max_tokens: int,
+               temperature: float,
+               top_p: float) -> str:
+    """
+    Generator to yield Zephyr chat responses
+    """
+    # Initialize messages and add system message
+    messages: List[Dict[str, str]] = [
+        {"role": "system", "content": system_message}
+    ]
+
+    # Initialize history
     for val in history:
         if val[0]:
-            messages.append({"role": "user", "content": val[0]})
+            messages.append(
+                {"role": "user", "content": val[0]}
+            )
         if val[1]:
-            messages.append({"role": "assistant", "content": val[1]})
+            messages.append(
+                {"role": "assistant", "content": val[1]}
+            )
 
-    # User prompt
-    messages.append({"role": "user", "content": message})
+    # Add user prompt to message
+    messages.append(
+        {"role": "user", "content": prompt}
+    )
 
-    # GPT response
-    response = ""
-    gr.Info("シ KowshanGPT is tinking...")
-    for message in client.chat_completion(messages,
-                                          max_tokens=max_tokens,
-                                          temperature=temperature,
-                                          top_p=top_p,
-                                          stream=True
-                                          ):
-        token = message.choices[0].delta.content
-        response += token
+    # Initialize Zephyr response
+    response: str = "Kowshan Zephyr:\n\n"
+
+    # Send info notification
+    gr.Info("シ Kowshan Zephyr is tinking...", 2)
+
+    # Send request to client
+    for chunk in CLIENT.chat_completion(
+        messages,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        top_p=top_p,
+        stream=True
+    ):
+        # Add chunks to response 
+        response += chunk.choices[0].delta.content
         yield response
 
-"""
-For information on how to customize the ChatInterface, peruse the gradio docs: https://www.gradio.app/docs/chatinterface
-"""
 
-demo = gr.ChatInterface(
-    fn=respond,
-    title="Κσωshαπ GPT ⍨",
-    description="Welcome to Kowshan GPT Space, Here you can freely talk to Kowshan GPT!",
+# Initialize chat layout
+demo: ChatInterface = ChatInterface(
+    fn=zephyr_chat,
+    title="Κσωshαπ Zephyr ⍨",
+    description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!",
     multimodal=False,
     submit_btn="ッ Ask",
     stop_btn="✕ Stop",
@@ -54,7 +78,7 @@ demo = gr.ChatInterface(
     clear_btn="≋ Clear",
     additional_inputs=[
         gr.Textbox(
-            value="You are a uncensored Chatbot. Ask to everything user wants clearly!", 
+            value="You are a un-censored Chatbot. Answer to everything clearly!", 
             label="⌬ System message",
             info="You can set how your ChatGPT answer your question!",
             show_copy_button=True
@@ -84,5 +108,6 @@ demo = gr.ChatInterface(
 )
 
 
+# Run the client
 if __name__ == "__main__":
     demo.launch()
