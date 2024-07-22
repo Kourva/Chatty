@@ -6,7 +6,7 @@ from typing import Dict, List, Tuple, NoReturn
 
 # 3rd-Party libraries
 import gradio as gr
-from gradio import ChatInterface
+from gradio import ChatInterface, ChatMessage
 from huggingface_hub import InferenceClient
 
 # Local libraries
@@ -34,20 +34,30 @@ def zephyr_chat(prompt: str,
     for val in history:
         if val[0]:
             messages.append(
-                {"role": "user", "content": val[0]}
+                ChatMessage(
+                    role="user", 
+                    content=val[0]
+                )
             )
         if val[1]:
             messages.append(
-                {"role": "assistant", "content": val[1]}
+                ChatMessage(
+                    role="assistant", 
+                    content=val[1],
+                    metadata={"title": "💬 〔 Kowshan Zephyr 〕"}
+                )
             )
 
     # Add user prompt to message
     messages.append(
-        {"role": "user", "content": prompt}
+        ChatMessage(
+            role="user",
+            content=prompt
+        )
     )
 
     # Initialize Zephyr response
-    response: str = "〔 Kowshan Zephyr 〕\n\n"
+    response: str = ""
 
     # Send request to client
     for chunk in CLIENT.chat_completion(
@@ -65,9 +75,23 @@ def zephyr_chat(prompt: str,
 # Initialize chat layout
 demo: ChatInterface = ChatInterface(
     fn=zephyr_chat,
+    chatbot=gr.Chatbot(
+        placeholder="Ask me anything...",
+        label="Zephyr chat",
+        show_label=True,
+        show_share_button=True,
+        show_copy_button=True,
+        avatar_images=("user.png", "chatbot.png"),
+        bubble_full_width=False
+    ),
     title="Κσωshαπ ζερhyr ⍨",
     description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!\nDeveloped with 🐍 by Kourva (Kozyol)",
     multimodal=False,
+    examples=[
+        "Hey, Who are you?",
+        "Make a simple Python random integer generator.",
+        "Help me solve my math"
+    ],
     submit_btn="ッ Ask",
     stop_btn="✕ Stop",
     retry_btn="⟲ Retry",
