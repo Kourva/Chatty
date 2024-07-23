@@ -84,14 +84,15 @@ demo: ChatInterface = ChatInterface(
         bubble_full_width=False,
         layout="bubble"
     ),
+    theme="soft",
     title="Κσωshαπ ζερhyr ⍨",
     description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
-    multimodal=False,
-    # examples=[
-    #     {"text": "Hey, Who are you?"},
-    #     {"text": "Make a simple Python random integer generator."},
-    #     {"text": "Help me solve my math."}
-    # ],
+    examples=[
+        "How can I connect to a server?",
+        "How can I access a dataset?",
+        "How can I get the current date?",
+    ],
+    cache_examples=True,
     submit_btn="ッ Ask",
     stop_btn="✕ Stop",
     retry_btn="⟲ Retry",
