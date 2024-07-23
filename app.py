@@ -14,8 +14,8 @@ from huggingface_hub import InferenceClient
 # Zephyr chat generator function
 def zephyr_chat(prompt: str,
                 history: List[Tuple[str, str]],
-                model: str,
                 system_message: str,
+                model: str,
                 max_tokens: int,
                 temperature: float,
                 top_p: float) -> str:
