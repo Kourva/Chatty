@@ -108,7 +108,7 @@ demo: ChatInterface = ChatInterface(
                 "starchat2-15b-v0.1"
             ],
             value="zephyr-7b-beta",
-            lable="Chat Client",
+            label="Chat Client",
             info="Choose your chat client! Default to Zephyr"
         ),
         gr.Slider(
