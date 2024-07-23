@@ -86,11 +86,11 @@ demo: ChatInterface = ChatInterface(
     title="Κσωshαπ ζερhyr ⍨",
     description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!\nDeveloped with 🐍 by Kourva (Kozyol)",
     multimodal=False,
-    examples=[
-        {"text": "Hey, Who are you?"},
-        {"text": "Make a simple Python random integer generator."},
-        {"text": "Help me solve my math."}
-    ],
+    # examples=[
+    #     {"text": "Hey, Who are you?"},
+    #     {"text": "Make a simple Python random integer generator."},
+    #     {"text": "Help me solve my math."}
+    # ],
     submit_btn="ッ Ask",
     stop_btn="✕ Stop",
     retry_btn="⟲ Retry",
