@@ -133,6 +133,7 @@ with gr.Blocks(theme=THEME) as demo:
             ),
         ],
         fill_height=False,
+        fill_width=True
     )
 
 
