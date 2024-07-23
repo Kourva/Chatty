@@ -74,19 +74,19 @@ def zephyr_chat(prompt: str,
 # Initialize chat layout
 demo: ChatInterface = ChatInterface(
     fn=zephyr_chat,
-    # theme="base",
+    theme="base",
     title="Κσωshαπ ζερhyr ⍨",
     description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
-    chatbot=gr.Chatbot(
-        placeholder="Ask me anything 👀",
-        label="Zephyr chat 7b beta",
-        show_label=True,
-        show_share_button=True,
-        show_copy_button=True,
-        avatar_images=("user.png", "chatbot.png"),
-        bubble_full_width=False,
-        layout="bubble"
-    ),
+    # chatbot=gr.Chatbot(
+    #     placeholder="Ask me anything 👀",
+    #     label="Zephyr chat 7b beta",
+    #     show_label=True,
+    #     show_share_button=True,
+    #     show_copy_button=True,
+    #     avatar_images=("user.png", "chatbot.png"),
+    #     bubble_full_width=False,
+    #     layout="bubble"
+    # ),
     submit_btn="ッ Ask",
     stop_btn="✕ Stop",
     retry_btn="⟲ Retry",
