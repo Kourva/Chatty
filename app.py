@@ -28,9 +28,12 @@ def respond(message,
     # GPT response
     response = ""
     for message in client.text_generation(messages,
-                                          max_tokens=max_tokens,
+                                          max_new_tokens=max_tokens,
                                           temperature=temperature,
                                           top_p=top_p,
+                                          repetition_penalty=1,
+                                          do_sample=True,
+                                          seed=42,
                                           stream=True, 
                                           details=True, 
                                           return_full_text=False):
