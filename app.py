@@ -76,7 +76,7 @@ demo: ChatInterface = ChatInterface(
     fn=zephyr_chat,
     chatbot=gr.Chatbot(
         placeholder="Ask me anything...",
-        label="Zephyr chat",
+        label="Zephyr chat 7b beta",
         show_label=True,
         show_share_button=True,
         show_copy_button=True,
@@ -86,7 +86,9 @@ demo: ChatInterface = ChatInterface(
     ),
     textbox=gr.Textbox(
         placeholder="ッ Ask any questions (Enter to process)",
-        label="Prompt"
+        label="Prompt",
+        min_width=220,
+        show_copy_button=True
     ),
     title="Κσωshαπ ζερhyr ⍨",
     description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
