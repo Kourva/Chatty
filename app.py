@@ -38,11 +38,7 @@ def respond(message,
                                           # details=True, 
                                           # return_full_text=False
                                           ):
-        if not response.token.text == "</s>":
-            token = message.choices[0].delta.content
-            response += token
-    
-        yield response
+        print(message)
 
 """
 For information on how to customize the ChatInterface, peruse the gradio docs: https://www.gradio.app/docs/chatinterface
