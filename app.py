@@ -3,7 +3,7 @@ import gradio as gr
 from huggingface_hub import InferenceClient
 
 # Client
-client = InferenceClient("togethercomputer/GPT-NeoXT-Chat-Base-20B")
+client = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
 
 # Chat GPT generator
 def respond(message,
@@ -27,14 +27,14 @@ def respond(message,
 
     # GPT response
     response = ""
-    for message in client.generate(messages,
+    for message in client.completion(messages,
                                           max_tokens=max_tokens,
                                           temperature=temperature,
-                                          # top_p=top_p,
+                                          top_p=top_p,
                                           # repetition_penalty=1,
-                                          do_sample=True,
+                                          # do_sample=True,
                                           # seed=42,
-                                          # stream=True, 
+                                          stream=True, 
                                           # details=True, 
                                           # return_full_text=False
                                           ):
