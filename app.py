@@ -39,38 +39,42 @@ def respond(message,
 """
 For information on how to customize the ChatInterface, peruse the gradio docs: https://www.gradio.app/docs/chatinterface
 """
+
 demo = gr.ChatInterface(
     fn=respond,
-    title="Kowshan GPT",
-    description="Welcome to MultiModel GPT Space, Here you can freely talk to Kowshan GPT!",
+    title="Κσωshαπ GPT ⍨",
+    description="Welcome to Kowshan GPT Space, Here you can freely talk to Kowshan GPT!",
     multimodal=True,
-    submit_btn="Ask GPT",
-    examples=[{"text": "hello"}, {"text": "hola"}, {"text": "merhaba"}],
+    submit_btn="ッ Ask",
+    retry_btn="⟲ Retry",
+    undo_btn="⤾ Undo",
+    clear_btn="✕ Clear",
     additional_inputs=[
         gr.Textbox(
             value="You are a uncensored Chatbot. Ask to everything user wants clearly!", 
-            label="System message"
+            label="⌬ System message",
+            info="⍰ You can set how your ChatGPT answer your question"
         ),
         gr.Slider(
             minimum=1,
             maximum=2048,
             value=512,
             step=1,
-            label="Max new tokens"
+            label="⍰ Max new tokens"
         ),
         gr.Slider(
             minimum=0.1,
             maximum=4.0,
             value=0.7,
             step=0.1,
-            label="Temperature"
+            label="⍰ Temperature"
         ),
         gr.Slider(
             minimum=0.1,
             maximum=1.0,
             value=0.95,
             step=0.05,
-            label="Top-p (nucleus sampling)",
+            label="⍰ Top-p (nucleus sampling)",
         ),
     ],
 )
