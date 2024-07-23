@@ -160,7 +160,7 @@ demo: ChatInterface = ChatInterface(
             label="⌬ Top-p (nucleus sampling)",
             info="The cumulative probability cutoff for token selection. Lower values mean sampling from a smaller, more top-weighted nucleus."
         ),
-        gt.Slider(
+        gr.Slider(
             minimum=0.1,
             maximum=1.0,
             value=1.0,
