@@ -44,7 +44,7 @@ demo = gr.ChatInterface(
     title="Kowshan GPT",
     description="Welcome to MultiModel GPT Space, Here you can freely talk to Kowshan GPT!",
     multimodal=True,
-    submit_btn="💬 KowshanGPT",
+    submit_btn="Ask GPT",
     additional_inputs=[
         gr.Textbox(
             value="You are a friendly Chatbot.", 
