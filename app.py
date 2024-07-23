@@ -6,7 +6,7 @@ from typing import Dict, List, Tuple, NoReturn
 
 # 3rd-Party libraries
 import gradio as gr
-from gradio import ChatInterface, ChatMessage
+from gradio import ChatInterface
 from huggingface_hub import InferenceClient
 
 # Local libraries
@@ -34,26 +34,25 @@ def zephyr_chat(prompt: str,
     for val in history:
         if val[0]:
             messages.append(
-                ChatMessage(
-                    role="user", 
-                    content=val[0]
-                )
+                {
+                    "role": "user", 
+                    "content": val[0]
+                }
             )
         if val[1]:
             messages.append(
-                ChatMessage(
-                    role="assistant", 
-                    content=val[1],
-                    metadata={"title": "💬 〔 Kowshan Zephyr 〕"}
-                )
+                {
+                    "role": "assistant", 
+                    "content": val[1]
+                }
             )
 
     # Add user prompt to message
     messages.append(
-        ChatMessage(
-            role="user",
-            content=prompt
-        )
+        {
+            "role": "user",
+            "content": prompt
+        }
     )
 
     # Initialize Zephyr response
