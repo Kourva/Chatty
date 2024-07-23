@@ -74,7 +74,7 @@ def zephyr_chat(prompt: str,
 # Initialize chat layout
 demo: ChatInterface = ChatInterface(
     fn=zephyr_chat,
-    theme="base",
+    # theme="base",
     title="Κσωshαπ ζερhyr ⍨",
     description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
     chatbot=gr.Chatbot(
