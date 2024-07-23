@@ -102,7 +102,7 @@ demo: ChatInterface = ChatInterface(
             info="You can set how your ChatGPT answer your question!",
             show_copy_button=True
         ),
-        gr.DropDown(
+        gr.Dropdown(
             choices=[
                 "zephyr-7b-beta",
                 "starchat2-15b-v0.1"
