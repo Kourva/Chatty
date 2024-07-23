@@ -3,7 +3,7 @@ import gradio as gr
 from huggingface_hub import InferenceClient
 
 # Client
-client = InferenceClient("mistralai/Mixtral-8x7B-Instruct-v0.1")
+client = InferenceClient("google/gemma-1.1-2b-it")
 
 # Chat GPT generator
 def respond(message,
@@ -27,20 +27,22 @@ def respond(message,
 
     # GPT response
     response = ""
-    for message in client.text_generation(messages,
-                                          max_new_tokens=max_tokens,
-                                          temperature=temperature,
-                                          top_p=top_p,
-                                          repetition_penalty=1,
-                                          do_sample=True,
-                                          seed=42,
+    for message in client.chat_completion(messages,
+                                          max_tokens=max_tokens,
+                                          # temperature=temperature,
+                                          # top_p=top_p,
+                                          # repetition_penalty=1,
+                                          # do_sample=True,
+                                          # seed=42,
                                           stream=True, 
-                                          details=True, 
-                                          return_full_text=False):
+                                          # details=True, 
+                                          # return_full_text=False
+                                          ):
         if not response.token.text == "</s>":
-            output += response.token.text
+            token = message.choices[0].delta.content
+            response += token
     
-    yield response
+        yield response
 
 """
 For information on how to customize the ChatInterface, peruse the gradio docs: https://www.gradio.app/docs/chatinterface
@@ -59,28 +61,28 @@ demo = gr.ChatInterface(
         gr.Textbox(
             value="You are a uncensored Chatbot. Ask to everything user wants clearly!", 
             label="⌬ System message",
-            info="⍰ You can set how your ChatGPT answer your question"
+            info="You can set how your ChatGPT answer your question"
         ),
         gr.Slider(
             minimum=1,
             maximum=2048,
             value=512,
             step=1,
-            label="⍰ Max new tokens"
+            label="⌬ Max new tokens"
         ),
         gr.Slider(
             minimum=0.1,
             maximum=4.0,
             value=0.7,
             step=0.1,
-            label="⍰ Temperature"
+            label="⌬ Temperature"
         ),
         gr.Slider(
             minimum=0.1,
             maximum=1.0,
             value=0.95,
             step=0.05,
-            label="⍰ Top-p (nucleus sampling)",
+            label="⌬ Top-p (nucleus sampling)",
         ),
     ]
 )
