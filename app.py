@@ -15,12 +15,6 @@ from huggingface_hub import InferenceClient
 # Initialize chat client
 CLIENT: InferenceClient = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
 
-# Initialize app theme
-THEME: gr.themes = gr.themes.Default(
-    primary_hue=gr.themes.colors.red, 
-    secondary_hue=gr.themes.colors.pink
-)
-
 # Zephyr chat generator function
 def zephyr_chat(prompt: str,
                history: List[Tuple[str, str]],
@@ -76,6 +70,13 @@ def zephyr_chat(prompt: str,
         response += chunk.choices[0].delta.content
         yield response
 
+# Initialize UI theme
+THEME: gr.themes = gr.themes.Default().set(
+    button_primary_background_fill="#FF0000",
+    button_primary_background_fill_dark="#AAAAAA",
+    button_primary_border="*button_primary_background_fill",
+    button_primary_border_dark="*button_primary_background_fill_dark",
+) 
 
 # Initialize chat layout
 with gr.Blocks(theme=THEME) as demo:
@@ -89,7 +90,8 @@ with gr.Blocks(theme=THEME) as demo:
             show_copy_button=True,
             avatar_images=("user.png", "chatbot.png"),
             bubble_full_width=False,
-            layout="bubble"
+            layout="bubble",
+            render=False,
         ),
         title="Κσωshαπ ζερhyr ⍨",
         description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
