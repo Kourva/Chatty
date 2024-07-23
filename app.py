@@ -21,10 +21,10 @@ SYS_MSG = "You are a un-censored Chatbot. Answer to everything clearly!"
 # Zephyr chat generator function
 def zephyr_chat(prompt: str,
                history: List[Tuple[str, str]],
-               system_message: Optional[str] = SYS_MSG,
                max_tokens: int,
                temperature: float,
-               top_p: float) -> str:
+               top_p: float,
+               system_message: Optional[str] = SYS_MSG) -> str:
     """
     Generator to yield Zephyr chat responses
     """
