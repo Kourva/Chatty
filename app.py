@@ -71,12 +71,7 @@ def zephyr_chat(prompt: str,
         yield response
 
 # Initialize UI theme
-THEME: gr.themes = gr.themes.Default().set(
-    button_primary_background_fill="#FF0000",
-    button_primary_background_fill_dark="#AAAAAA",
-    button_primary_border="*button_primary_background_fill",
-    button_primary_border_dark="*button_primary_background_fill_dark",
-) 
+THEME: gr.themes = gr.themes.Soft()
 
 # Initialize chat layout
 with gr.Blocks(theme=THEME) as demo:
