@@ -88,9 +88,9 @@ demo: ChatInterface = ChatInterface(
     title="Κσωshαπ ζερhyr ⍨",
     description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
     examples=[
-        "How can I connect to a server?",
-        "How can I access a dataset?",
-        "How can I get the current date?",
+        ["How can I connect to a server?"],
+        ["How can I access a dataset?"],
+        ["How can I get the current date?"],
     ],
     cache_examples=True,
     submit_btn="ッ Ask",
