@@ -27,6 +27,7 @@ def respond(message,
 
     # GPT response
     response = ""
+    gr.Info("シ KowshanGPT is tinking...", duration=2)
     for message in client.chat_completion(messages,
                                           max_tokens=max_tokens,
                                           temperature=temperature,
@@ -47,34 +48,36 @@ demo = gr.ChatInterface(
     description="Welcome to Kowshan GPT Space, Here you can freely talk to Kowshan GPT!",
     multimodal=False,
     submit_btn="ッ Ask",
+    stop_btn="✕ Stop",
     retry_btn="⟲ Retry",
     undo_btn="⤾ Undo",
-    clear_btn="✕ Clear",
+    clear_btn="≋ Clear",
     additional_inputs=[
         gr.Textbox(
             value="You are a uncensored Chatbot. Ask to everything user wants clearly!", 
             label="⌬ System message",
-            info="You can set how your ChatGPT answer your question"
+            info="You can set how your ChatGPT answer your question!",
+            show_copy_button=True
         ),
         gr.Slider(
             minimum=1,
             maximum=2048,
-            value=512,
+            value=1024,
             step=1,
             label="⌬ Max new tokens"
         ),
         gr.Slider(
             minimum=0.1,
-            maximum=4.0,
-            value=0.7,
+            maximum=1.0,
+            value=0.9,
             step=0.1,
             label="⌬ Temperature"
         ),
         gr.Slider(
             minimum=0.1,
             maximum=1.0,
-            value=0.95,
-            step=0.05,
+            value=0.9,
+            step=0.1,
             label="⌬ Top-p (nucleus sampling)",
         ),
     ]
