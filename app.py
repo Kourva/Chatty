@@ -3,7 +3,7 @@ import gradio as gr
 from huggingface_hub import InferenceClient
 
 # Client
-client = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
+client = InferenceClient("mistralai/Mixtral-8x7B-Instruct-v0.1")
 
 # Chat GPT generator
 def respond(message,
@@ -27,14 +27,18 @@ def respond(message,
 
     # GPT response
     response = ""
-    for message in client.chat_completion(messages,
+    for message in client.text_generation(messages,
                                           max_tokens=max_tokens,
                                           stream=True,
                                           temperature=temperature,
-                                          top_p=top_p):
-        token = message.choices[0].delta.content
-        response += token
-        yield response
+                                          top_p=top_p,
+                                          stream=True, 
+                                          details=True, 
+                                          return_full_text=False):
+        if not response.token.text == "</s>":
+            output += response.token.text
+    
+    yield response
 
 """
 For information on how to customize the ChatInterface, peruse the gradio docs: https://www.gradio.app/docs/chatinterface
@@ -76,9 +80,7 @@ demo = gr.ChatInterface(
             step=0.05,
             label="⍰ Top-p (nucleus sampling)",
         ),
-    ],
-    css="style.css",
-    head="<title>Kowshan GPT</title>"
+    ]
 )
 
 
