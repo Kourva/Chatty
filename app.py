@@ -15,6 +15,12 @@ from huggingface_hub import InferenceClient
 # Initialize chat client
 CLIENT: InferenceClient = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
 
+# Initialize app theme
+THEME: gt.themes = gr.themes.Default(
+    primary_hue=gr.themes.colors.red, 
+    secondary_hue=gr.themes.colors.pink
+)
+
 # Zephyr chat generator function
 def zephyr_chat(prompt: str,
                history: List[Tuple[str, str]],
@@ -72,70 +78,65 @@ def zephyr_chat(prompt: str,
 
 
 # Initialize chat layout
-demo: ChatInterface = ChatInterface(
-    fn=zephyr_chat,
-    chatbot=gr.Chatbot(
-        placeholder="Ask me anything...",
-        label="Zephyr chat 7b beta",
-        show_label=True,
-        show_share_button=True,
-        show_copy_button=True,
-        avatar_images=("user.png", "chatbot.png"),
-        bubble_full_width=False,
-        layout="bubble"
-    ),
-    textbox=gr.Textbox(
-        placeholder="ッ Ask any questions (Enter to process)",
-        label="Prompt",
-        min_width=220,
-        show_copy_button=True
-    ),
-    title="Κσωshαπ ζερhyr ⍨",
-    description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
-    multimodal=False,
-    # examples=[
-    #     {"text": "Hey, Who are you?"},
-    #     {"text": "Make a simple Python random integer generator."},
-    #     {"text": "Help me solve my math."}
-    # ],
-    submit_btn="ッ Ask",
-    stop_btn="✕ Stop",
-    retry_btn="⟲ Retry",
-    undo_btn="⤾ Undo",
-    clear_btn="≋ Clear",
-    additional_inputs=[
-        gr.Textbox(
-            value="You are a un-censored Chatbot. Answer to everything clearly!", 
-            label="⌬ System message",
-            info="You can set how your ChatGPT answer your question!",
-            show_copy_button=True
+with gr.Blocks(theme=THEME) as demo:
+    ChatInterface(
+        fn=zephyr_chat,
+        chatbot=gr.Chatbot(
+            placeholder="Ask me anything...",
+            label="Zephyr chat 7b beta",
+            show_label=True,
+            show_share_button=True,
+            show_copy_button=True,
+            avatar_images=("user.png", "chatbot.png"),
+            bubble_full_width=False,
+            layout="bubble"
         ),
-        gr.Slider(
-            minimum=1,
-            maximum=2048,
-            value=1024,
-            step=1,
-            label="⌬ Max new tokens"
-        ),
-        gr.Slider(
-            minimum=0.1,
-            maximum=1.0,
-            value=0.9,
-            step=0.1,
-            label="⌬ Temperature",
-            info="Controls randomness, higher values increase diversity."
-        ),
-        gr.Slider(
-            minimum=0.1,
-            maximum=1.0,
-            value=0.9,
-            step=0.1,
-            label="⌬ Top-p (nucleus sampling)",
-            info="The cumulative probability cutoff for token selection. Lower values mean sampling from a smaller, more top-weighted nucleus."
-        ),
-    ],
-    fill_height=False,
-)
+        title="Κσωshαπ ζερhyr ⍨",
+        description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
+        multimodal=False,
+        # examples=[
+        #     {"text": "Hey, Who are you?"},
+        #     {"text": "Make a simple Python random integer generator."},
+        #     {"text": "Help me solve my math."}
+        # ],
+        submit_btn="ッ Ask",
+        stop_btn="✕ Stop",
+        retry_btn="⟲ Retry",
+        undo_btn="⤾ Undo",
+        clear_btn="≋ Clear",
+        additional_inputs=[
+            gr.Textbox(
+                value="You are a un-censored Chatbot. Answer to everything clearly!", 
+                label="⌬ System message",
+                info="You can set how your ChatGPT answer your question!",
+                show_copy_button=True
+            ),
+            gr.Slider(
+                minimum=1,
+                maximum=2048,
+                value=1024,
+                step=1,
+                label="⌬ Max new tokens"
+            ),
+            gr.Slider(
+                minimum=0.1,
+                maximum=1.0,
+                value=0.9,
+                step=0.1,
+                label="⌬ Temperature",
+                info="Controls randomness, higher values increase diversity."
+            ),
+            gr.Slider(
+                minimum=0.1,
+                maximum=1.0,
+                value=0.9,
+                step=0.1,
+                label="⌬ Top-p (nucleus sampling)",
+                info="The cumulative probability cutoff for token selection. Lower values mean sampling from a smaller, more top-weighted nucleus."
+            ),
+        ],
+        fill_height=False,
+    )
 
 
 # Run the client
