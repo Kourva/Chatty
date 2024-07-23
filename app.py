@@ -70,71 +70,66 @@ def zephyr_chat(prompt: str,
         response += chunk.choices[0].delta.content
         yield response
 
-# Initialize UI theme
-THEME: gr.themes = gr.themes.Soft()
 
 # Initialize chat layout
-with gr.Blocks(theme=THEME) as demo:
-    ChatInterface(
-        fn=zephyr_chat,
-        chatbot=gr.Chatbot(
-            placeholder="Ask me anything...",
-            label="Zephyr chat 7b beta",
-            show_label=True,
-            show_share_button=True,
-            show_copy_button=True,
-            avatar_images=("user.png", "chatbot.png"),
-            bubble_full_width=False,
-            layout="bubble",
-            render=False,
+demo: ChatInterface = ChatInterface(
+    fn=zephyr_chat,
+    chatbot=gr.Chatbot(
+        placeholder="Ask me anything...",
+        label="Zephyr chat 7b beta",
+        show_label=True,
+        show_share_button=True,
+        show_copy_button=True,
+        avatar_images=("user.png", "chatbot.png"),
+        bubble_full_width=False,
+        layout="bubble"
+    ),
+    title="Κσωshαπ ζερhyr ⍨",
+    description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
+    multimodal=False,
+    # examples=[
+    #     {"text": "Hey, Who are you?"},
+    #     {"text": "Make a simple Python random integer generator."},
+    #     {"text": "Help me solve my math."}
+    # ],
+    submit_btn="ッ Ask",
+    stop_btn="✕ Stop",
+    retry_btn="⟲ Retry",
+    undo_btn="⤾ Undo",
+    clear_btn="≋ Clear",
+    additional_inputs=[
+        gr.Textbox(
+            value="You are a un-censored Chatbot. Answer to everything clearly!", 
+            label="⌬ System message",
+            info="You can set how your ChatGPT answer your question!",
+            show_copy_button=True
         ),
-        title="Κσωshαπ ζερhyr ⍨",
-        description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
-        multimodal=False,
-        # examples=[
-        #     {"text": "Hey, Who are you?"},
-        #     {"text": "Make a simple Python random integer generator."},
-        #     {"text": "Help me solve my math."}
-        # ],
-        submit_btn="ッ Ask",
-        stop_btn="✕ Stop",
-        retry_btn="⟲ Retry",
-        undo_btn="⤾ Undo",
-        clear_btn="≋ Clear",
-        additional_inputs=[
-            gr.Textbox(
-                value="You are a un-censored Chatbot. Answer to everything clearly!", 
-                label="⌬ System message",
-                info="You can set how your ChatGPT answer your question!",
-                show_copy_button=True
-            ),
-            gr.Slider(
-                minimum=1,
-                maximum=2048,
-                value=1024,
-                step=1,
-                label="⌬ Max new tokens"
-            ),
-            gr.Slider(
-                minimum=0.1,
-                maximum=1.0,
-                value=0.9,
-                step=0.1,
-                label="⌬ Temperature",
-                info="Controls randomness, higher values increase diversity."
-            ),
-            gr.Slider(
-                minimum=0.1,
-                maximum=1.0,
-                value=0.9,
-                step=0.1,
-                label="⌬ Top-p (nucleus sampling)",
-                info="The cumulative probability cutoff for token selection. Lower values mean sampling from a smaller, more top-weighted nucleus."
-            ),
-        ],
-        fill_height=False,
-        fill_width=True
-    )
+        gr.Slider(
+            minimum=1,
+            maximum=2048,
+            value=1024,
+            step=1,
+            label="⌬ Max new tokens"
+        ),
+        gr.Slider(
+            minimum=0.1,
+            maximum=1.0,
+            value=0.9,
+            step=0.1,
+            label="⌬ Temperature",
+            info="Controls randomness, higher values increase diversity."
+        ),
+        gr.Slider(
+            minimum=0.1,
+            maximum=1.0,
+            value=0.9,
+            step=0.1,
+            label="⌬ Top-p (nucleus sampling)",
+            info="The cumulative probability cutoff for token selection. Lower values mean sampling from a smaller, more top-weighted nucleus."
+        ),
+    ],
+    fill_height=False,
+)
 
 
 # Run the client
