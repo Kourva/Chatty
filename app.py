@@ -9,7 +9,6 @@ import gradio as gr
 from gradio import ChatInterface
 from huggingface_hub import InferenceClient
 
-# Local libraries
 
 # Zephyr chat generator function
 def zephyr_chat(prompt: str,
@@ -18,15 +17,11 @@ def zephyr_chat(prompt: str,
                 model: str,
                 max_tokens: int,
                 temperature: float,
-                top_p: float) -> str:
+                top_p: float,
+                repetition_penalty: float) -> str:
     """
-    Generator to yield Zephyr chat responses
+    Generator to yield Chat responses
     """
-    print(model)
-    # Initialize chat client
-    CLIENT: InferenceClient = InferenceClient(
-        "HuggingFaceH4/zephyr-7b-beta"
-    )
 
     # Initialize messages and add system message
     messages: List[Dict[str, str]] = [
@@ -61,17 +56,48 @@ def zephyr_chat(prompt: str,
     # Initialize Zephyr response
     response: str = ""
 
-    # Send request to client
-    for chunk in CLIENT.chat_completion(
-        messages,
-        max_tokens=max_tokens,
-        temperature=temperature,
-        top_p=top_p,
-        stream=True
-    ):
-        # Add chunks to response 
-        response += chunk.choices[0].delta.content
-        yield response
+    # Switch case models
+    case model:
+        match "zephyr-7b-beta":
+            # Initialize chat client
+            CLIENT: InferenceClient = InferenceClient(
+                "HuggingFaceH4/zephyr-7b-beta"
+            )
+            # Send request to client
+            for chunk in CLIENT.chat_completion(
+                messages,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                top_p=top_p,
+                stream=True
+            ):
+                # Add chunks to response 
+                response += chunk.choices[0].delta.content
+                yield response
+
+        match "Mistral-7B-Instruct-v0.3":
+            # Initialize chat client
+            CLIENT: InferenceClient = InferenceClient(
+                "mistralai/Mistral-7B-Instruct-v0.3"
+            )
+            # Send request to client
+            for chunk in CLIENT.text_generation(
+                messages,
+                temperature=temperature,
+                max_new_tokens=max_tokens,
+                top_p=top_p,
+                repetition_penalty=repetition_penalty,
+                do_sample=True,
+                seed=42,
+                stream=True, 
+                details=True, 
+                return_full_text=False
+            ):
+                response += chunk.token.text
+                yield response
+
+        match _:
+            yield response
 
 
 # Initialize chat layout
@@ -105,7 +131,7 @@ demo: ChatInterface = ChatInterface(
         gr.Dropdown(
             choices=[
                 "zephyr-7b-beta",
-                "starchat2-15b-v0.1"
+                "Mistral-7B-Instruct-v0.3"
             ],
             value="zephyr-7b-beta",
             label="Chat Client",
@@ -133,6 +159,14 @@ demo: ChatInterface = ChatInterface(
             step=0.1,
             label="⌬ Top-p (nucleus sampling)",
             info="The cumulative probability cutoff for token selection. Lower values mean sampling from a smaller, more top-weighted nucleus."
+        ),
+        gt.Slider(
+            minimum=0.1,
+            maximum=1.0,
+            value=1.0,
+            step=0.1,
+            label="Repetition penalty",
+            info="Penalizes every token that's repeating, even tokens in the middle/end of a word, stopwords, and punctuation."
         )
     ],
 )
