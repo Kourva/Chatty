@@ -57,8 +57,8 @@ def zephyr_chat(prompt: str,
     response: str = ""
 
     # Switch case models
-    case model:
-        match "zephyr-7b-beta":
+    match model:
+        case "zephyr-7b-beta":
             # Initialize chat client
             CLIENT: InferenceClient = InferenceClient(
                 "HuggingFaceH4/zephyr-7b-beta"
@@ -75,7 +75,7 @@ def zephyr_chat(prompt: str,
                 response += chunk.choices[0].delta.content
                 yield response
 
-        match "Mistral-7B-Instruct-v0.3":
+        case "Mistral-7B-Instruct-v0.3":
             # Initialize chat client
             CLIENT: InferenceClient = InferenceClient(
                 "mistralai/Mistral-7B-Instruct-v0.3"
@@ -96,7 +96,7 @@ def zephyr_chat(prompt: str,
                 response += chunk.token.text
                 yield response
 
-        match _:
+        case _:
             yield response
 
 
