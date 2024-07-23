@@ -31,7 +31,6 @@ def respond(message,
                                           max_tokens=max_tokens,
                                           temperature=temperature,
                                           top_p=top_p,
-                                          do_sample=True,
                                           stream=True
                                           ):
         token = message.choices[0].delta.content
