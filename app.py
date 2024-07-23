@@ -11,20 +11,23 @@ from huggingface_hub import InferenceClient
 
 # Local libraries
 
-
-# Initialize chat client
-CLIENT: InferenceClient = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
-
 # Zephyr chat generator function
 def zephyr_chat(prompt: str,
-               history: List[Tuple[str, str]],
-               system_message: str,
-               max_tokens: int,
-               temperature: float,
-               top_p: float) -> str:
+                history: List[Tuple[str, str]],
+                model: str,
+                system_message: str,
+                max_tokens: int,
+                temperature: float,
+                top_p: float) -> str:
     """
     Generator to yield Zephyr chat responses
     """
+    print(model)
+    # Initialize chat client
+    CLIENT: InferenceClient = InferenceClient(
+        "HuggingFaceH4/zephyr-7b-beta"
+    )
+
     # Initialize messages and add system message
     messages: List[Dict[str, str]] = [
         {"role": "system", "content": system_message}
@@ -76,7 +79,7 @@ demo: ChatInterface = ChatInterface(
     fn=zephyr_chat,
     theme="base",
     title="Κσωshαπ ζερhyr ⍨",
-    description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
+    description="Welcome to Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
     chatbot=gr.Chatbot(
         placeholder="Ask me anything 👀",
         label="Zephyr chat 7b beta",
@@ -98,6 +101,15 @@ demo: ChatInterface = ChatInterface(
             label="⌬ System message",
             info="You can set how your ChatGPT answer your question!",
             show_copy_button=True
+        ),
+        gr.DropDown(
+            choices=[
+                "zephyr-7b-beta",
+                "starchat2-15b-v0.1"
+            ],
+            value="zephyr-7b-beta",
+            lable="Chat Client",
+            info="Choose your chat client! Default to Zephyr"
         ),
         gr.Slider(
             minimum=1,
