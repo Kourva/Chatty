@@ -27,7 +27,7 @@ def respond(message,
 
     # GPT response
     response = ""
-    gr.Info("シ KowshanGPT is tinking...", duration=2)
+    gr.Info("シ KowshanGPT is tinking...")
     for message in client.chat_completion(messages,
                                           max_tokens=max_tokens,
                                           temperature=temperature,
