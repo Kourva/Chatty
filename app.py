@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Standard libraries
-from typing import Dict, List, Tuple, NoReturn
+from typing import Dict, List, Tuple, Optional, NoReturn
 
 # 3rd-Party libraries
 import gradio as gr
@@ -81,10 +81,11 @@ demo: ChatInterface = ChatInterface(
         show_share_button=True,
         show_copy_button=True,
         avatar_images=("user.png", "chatbot.png"),
-        bubble_full_width=False
+        bubble_full_width=False,
+        layout="panel"
     ),
     title="Κσωshαπ ζερhyr ⍨",
-    description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!\nDeveloped with 🐍 by Kourva (Kozyol)",
+    description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
     multimodal=False,
     # examples=[
     #     {"text": "Hey, Who are you?"},
