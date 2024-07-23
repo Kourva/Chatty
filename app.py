@@ -77,6 +77,8 @@ demo = gr.ChatInterface(
             label="⍰ Top-p (nucleus sampling)",
         ),
     ],
+    css="style.css",
+    head="<title>Kowshan GPT</title>"
 )
 
 
