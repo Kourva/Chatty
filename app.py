@@ -29,7 +29,6 @@ def respond(message,
     response = ""
     for message in client.text_generation(messages,
                                           max_tokens=max_tokens,
-                                          stream=True,
                                           temperature=temperature,
                                           top_p=top_p,
                                           stream=True, 
