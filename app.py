@@ -82,7 +82,11 @@ demo: ChatInterface = ChatInterface(
         show_copy_button=True,
         avatar_images=("user.png", "chatbot.png"),
         bubble_full_width=False,
-        layout="panel"
+        layout="bubble"
+    ),
+    textbox=gr.Textbox(
+        placeholder="ッ Ask any questions (Enter to process)",
+        label="Prompt"
     ),
     title="Κσωshαπ ζερhyr ⍨",
     description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
@@ -116,7 +120,8 @@ demo: ChatInterface = ChatInterface(
             maximum=1.0,
             value=0.9,
             step=0.1,
-            label="⌬ Temperature"
+            label="⌬ Temperature",
+            info="Controls randomness, higher values increase diversity."
         ),
         gr.Slider(
             minimum=0.1,
@@ -124,8 +129,10 @@ demo: ChatInterface = ChatInterface(
             value=0.9,
             step=0.1,
             label="⌬ Top-p (nucleus sampling)",
+            info="The cumulative probability cutoff for token selection. Lower values mean sampling from a smaller, more top-weighted nucleus."
         ),
-    ]
+    ],
+    fill_height=False,
 )
 
 
