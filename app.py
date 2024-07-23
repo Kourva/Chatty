@@ -27,7 +27,7 @@ def respond(message,
 
     # GPT response
     response = ""
-    for message in client.completion(messages,
+    for message in client.chat_completion(messages,
                                           max_tokens=max_tokens,
                                           temperature=temperature,
                                           top_p=top_p,
