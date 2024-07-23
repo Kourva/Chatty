@@ -74,8 +74,11 @@ def zephyr_chat(prompt: str,
 # Initialize chat layout
 demo: ChatInterface = ChatInterface(
     fn=zephyr_chat,
+    theme="base",
+    title="Κσωshαπ ζερhyr ⍨",
+    description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
     chatbot=gr.Chatbot(
-        placeholder="Ask me anything...",
+        placeholder="Ask me anything 👀",
         label="Zephyr chat 7b beta",
         show_label=True,
         show_share_button=True,
@@ -84,10 +87,6 @@ demo: ChatInterface = ChatInterface(
         bubble_full_width=False,
         layout="bubble"
     ),
-    theme="soft",
-    title="Κσωshαπ ζερhyr ⍨",
-    description="Welcome to Kowshan Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
-    cache_examples=True,
     submit_btn="ッ Ask",
     stop_btn="✕ Stop",
     retry_btn="⟲ Retry",
@@ -122,9 +121,8 @@ demo: ChatInterface = ChatInterface(
             step=0.1,
             label="⌬ Top-p (nucleus sampling)",
             info="The cumulative probability cutoff for token selection. Lower values mean sampling from a smaller, more top-weighted nucleus."
-        ),
-    ],
-    fill_height=False,
+        )
+    ]
 )
 
 
