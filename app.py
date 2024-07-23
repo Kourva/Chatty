@@ -16,7 +16,7 @@ from huggingface_hub import InferenceClient
 CLIENT: InferenceClient = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
 
 # Initialize app theme
-THEME: gt.themes = gr.themes.Default(
+THEME: gr.themes = gr.themes.Default(
     primary_hue=gr.themes.colors.red, 
     secondary_hue=gr.themes.colors.pink
 )
