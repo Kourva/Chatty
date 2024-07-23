@@ -31,14 +31,12 @@ def respond(message,
                                           max_tokens=max_tokens,
                                           temperature=temperature,
                                           top_p=top_p,
-                                          # repetition_penalty=1,
-                                          # do_sample=True,
-                                          # seed=42,
-                                          stream=True, 
-                                          # details=True, 
-                                          # return_full_text=False
+                                          do_sample=True,
+                                          stream=True
                                           ):
-        print(message)
+        token = message.choices[0].delta.content
+        response += token
+        yield response
 
 """
 For information on how to customize the ChatInterface, peruse the gradio docs: https://www.gradio.app/docs/chatinterface
