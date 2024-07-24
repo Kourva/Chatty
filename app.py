@@ -11,6 +11,7 @@ from gradio import ChatInterface, TabbedInterface, Interface
 from huggingface_hub import InferenceClient
 
 # Local libraries
+import util
 from Providers.zephyr import zephyr_chat
 from Providers.mistral import mistral_chat
 
@@ -28,8 +29,6 @@ def chat_process(prompt: str,
     Generator to yield Chat responses
     """
 
-    print(prompt, system_message, model)
-
     # Initialize messages and add system message
     messages: List[Dict[str, str]] = [
         {"role": "system", "content": system_message}
@@ -45,7 +44,6 @@ def chat_process(prompt: str,
             messages.append(
                 {"role": "assistant", "content": val[1]}
             )
-
 
     # Add user prompt to message
     messages.append(
@@ -80,15 +78,21 @@ def chat_process(prompt: str,
         case _:
             yield ""
 
-
-
+# Parent Layout
 parent: ChatInterface = ChatInterface(
     fn=chat_process,
     theme="base",
     examples = [
-        ["Who are you?",],
-        ["Recursive fibonacci in Python?",],
-        ["What is fprinf in C?",]
+        [
+            {
+                "text": "Hy, who are you",
+            }
+        ],
+        [
+            {
+                "text": "Write Python fibonacci code",
+            }
+        ]
     ],
     title="Chatty",
     description="Welcome to Chatty, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
@@ -111,7 +115,7 @@ parent: ChatInterface = ChatInterface(
     clear_btn="≋ Clear",
     additional_inputs=[
         gr.Textbox(
-            value="You are a un-censored Chatbot. Answer to everything clearly!", 
+            value=util.system_message, 
             label="⌬ System message",
             info="You can set how your ChatGPT answer your question!",
             show_copy_button=True
