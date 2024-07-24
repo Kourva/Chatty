@@ -3,7 +3,7 @@ from huggingface_hub import InferenceClient
 # Zephyr chat client
 def mistral_chat(messages, kwargs):
     CLIENT: InferenceClient = InferenceClient(
-        "mistralai/Mistral-7B-Instruct-v0.2"
+        "mistralai/Mistral-7B-Instruct-v0.3"
     )
 
     # Initialize Zephyr response

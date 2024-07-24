@@ -62,11 +62,13 @@ def chat_process(prompt: str,
             }
             yield from zephyr_chat(messages, kwargs)
 
-        case "Mistral-7B-Instruct-v0.2":
+        case "Mistral-7B-Instruct-v0.3":
             kwargs = {
                 "max_new_tokens": max_tokens,
-                "stream": True,
-                "do_sample": True
+                "top_p": top_p,
+                "repetition_penalty": repetition_penalty,
+                "do_sample": True,
+                "seed": 42,
             }
             yield from mistral_chat(messages, kwargs)
 
@@ -104,7 +106,7 @@ chat_interface: ChatInterface = ChatInterface(
         gr.Dropdown(
             choices=[
                 "zephyr-7b-beta",
-                "Mistral-7B-Instruct-v0.2"
+                "Mistral-7B-Instruct-v0.3"
             ],
             value="zephyr-7b-beta",
             label="⌬ Chat Client",
