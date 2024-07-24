@@ -28,6 +28,8 @@ def chat_process(prompt: str,
     Generator to yield Chat responses
     """
 
+    print(prompt, system_message, model)
+
     # Initialize messages and add system message
     messages: List[Dict[str, str]] = [
         {"role": "system", "content": system_message}
@@ -88,6 +90,7 @@ parent: ChatInterface = ChatInterface(
         ["Recursive fibonacci in Python?"],
         ["What is fprinf in C?"]
     ],
+    title="Chatty",
     description="Welcome to Chatty, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
     chatbot=gr.Chatbot(
         placeholder="Ask me anything 👀",
