@@ -66,8 +66,8 @@ def chat_process(prompt: str,
 parent: ChatInterface = ChatInterface(
     fn=chat_process,
     theme="base",
-    title="<h1>Chatty</h1>",
-    fill_height=False,
+    title=util.title,
+    fill_height=True,
     description=util.description,
     chatbot=gr.Chatbot(
         placeholder="Ask me anything 👀",
@@ -93,7 +93,7 @@ parent: ChatInterface = ChatInterface(
             value=util.system_message, 
             label="⌬ System message",
             lines=5,
-            info="You can set how your ChatGPT answer your question!",
+            info="You can set how your model answer your question!",
             show_copy_button=True
         ),
         gr.Dropdown(

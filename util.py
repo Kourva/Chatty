@@ -9,9 +9,6 @@ description: str = """
 </div>
 """
 
-css: str = """
-#chatbot {
-    width: 100%;
-    margin: 10px;
-}
+title: str = """
+<h1 align="center">Chatty</h1>
 """
