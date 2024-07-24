@@ -81,7 +81,7 @@ def chat_process(prompt: str,
 
 
 with gr.Blocks() as parent:
-    gt.Markdown("Text chat")
+    gr.Markdown("Text chat")
     ChatInterface(
         fn=chat_process,
         theme="base",
