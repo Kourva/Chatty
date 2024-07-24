@@ -66,8 +66,7 @@ def chat_process(prompt: str,
             kwargs = {
                 "max_new_tokens": max_tokens,
                 "stream": True,
-                "details": True,
-                "return_full_text": False
+                "do_sample": True
             }
             yield from mistral_chat(messages, kwargs)
 

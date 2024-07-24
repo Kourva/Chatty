@@ -10,7 +10,7 @@ def zephyr_chat(messages, kwargs):
     response: str = ""
 
     # Send request to client
-    for chunk in CLIENT.chat_completion(
+    for chunk in CLIENT.generate(
         messages,
         **kwargs
     ):
