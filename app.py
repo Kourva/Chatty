@@ -6,7 +6,7 @@ from typing import Dict, List, Tuple, Optional, NoReturn
 
 # 3rd-Party libraries
 import gradio as gr
-from gradio import ChatInterface
+from gradio import ChatInterface, TabbedInterface, Interface
 from huggingface_hub import InferenceClient
 
 # Local libraries
@@ -15,13 +15,13 @@ from Providers.zephyr import zephyr_chat
 
 # Zephyr chat generator function
 def chat_process(prompt: str,
-                history: List[Tuple[str, str]],
-                system_message: str,
-                model: str,
-                max_tokens: int,
-                temperature: float,
-                top_p: float,
-                repetition_penalty: float) -> str:
+                 history: List[Tuple[str, str]],
+                 system_message: str,
+                 model: str,
+                 max_tokens: int,
+                 temperature: float,
+                 top_p: float,
+                 repetition_penalty: float) -> str:
     """
     Generator to yield Chat responses
     """
@@ -55,7 +55,6 @@ def chat_process(prompt: str,
             "content": prompt
         }
     )
-
 
     # Switch case models
     match model:
@@ -94,8 +93,8 @@ def chat_process(prompt: str,
             yield response
 
 
-# Initialize chat layout
-demo: ChatInterface = ChatInterface(
+# Chat section interface
+chat_interface: ChatInterface = ChatInterface(
     fn=chat_process,
     theme="base",
     title="Κσωshαπ ζερhyr ⍨",
@@ -165,7 +164,26 @@ demo: ChatInterface = ChatInterface(
     ],
 )
 
+# Image section interface
+image_interface: Interface = Interface(
+    lambda name: "Hello " + "name", "text", "text"
+)
+
+# Parent interface
+parent_interface: TabbedInterface = TabbedInterface(
+    interface_list=[
+        chat_interface,
+        image_interface
+    ],
+    tab_names=[
+        "Chatty",
+        "Imagy"
+    ],
+    title="Chatty",
+    theme="base"
+)
+
 
 # Run the client
 if __name__ == "__main__":
-    demo.launch()
+    parent_interface.launch()
