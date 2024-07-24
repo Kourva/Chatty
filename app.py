@@ -111,7 +111,7 @@ chat_interface: ChatInterface = ChatInterface(
                 "zephyr-7b-beta",
                 "Mistral-7B-Instruct-v0.1"
             ],
-            value="Mistral-7B-Instruct-v0.1",
+            value="zephyr-7b-beta",
             label="⌬ Chat Client",
             info="Choose your chat client! Default to Zephyr"
         ),
@@ -161,9 +161,9 @@ parent_interface: TabbedInterface = TabbedInterface(
     theme="base"
 )
 
+with gr.Blocks() as parent:
+    TabbedInterface
+
 # Run the client
 if __name__ == "__main__":
-    chat_interface.launch()
-
-    gr.load("models/ehristoforu/dalle-3-xl-v2").launch()
-    gr.load("models/microsoft/Phi-3-mini-4k-instruct").launch()
+    parent.launch()
