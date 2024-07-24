@@ -3,6 +3,7 @@
 
 # Standard libraries
 from typing import Dict, List, Tuple, Optional, NoReturn
+import asyncio
 
 # 3rd-Party libraries
 import gradio as gr
@@ -10,10 +11,12 @@ from gradio import ChatInterface, TabbedInterface, Interface
 from huggingface_hub import InferenceClient
 
 # Local libraries
+from util import transcribe
 from Providers.zephyr import zephyr_chat
+from Providers.mistral import mistral_chat
 
 
-# Zephyr chat generator function
+# Text chat function
 def chat_process(prompt: str,
                  history: List[Tuple[str, str]],
                  system_message: str,
@@ -59,9 +62,17 @@ def chat_process(prompt: str,
             }
             yield from zephyr_chat(messages, kwargs)
 
+        case "Mistral-7B-Instruct-v0.2":
+            kwargs = {
+                "max_new_tokens": max_tokens,
+                "stream": True,
+                "details": True,
+                "return_full_text": False
+            }
+            yield from mistral_chat(messages, kwargs)
+
         case _:
             yield ""
-
 
 # Chat section interface
 chat_interface: ChatInterface = ChatInterface(
@@ -131,6 +142,43 @@ chat_interface: ChatInterface = ChatInterface(
             info="Penalizes every token that's repeating, even tokens in the middle/end of a word, stopwords, and punctuation."
         )
     ],
+)
+
+with gr.Blocks() as voice:   
+    with gr.Row():
+        voice_input = gr.Audio(
+            label="Voice Chat", 
+            sources="microphone", 
+            type="filepath", 
+            waveform_options=True
+            )
+        voice_output = gr.Audio(
+            label="OpenGPT 4o", 
+            type="filepath",
+            interactive=False,
+            autoplay=True,
+            elem_classes="audio"
+        )
+        gr.Interface(
+            fn=respond, 
+            inputs=[voice_input],
+            outputs=[voice_output], 
+            live=True
+        )
+
+
+# Parent interface
+parent_interface: TabbedInterface = TabbedInterface(
+    interface_list=[
+        voice_interface,
+        chat_interface
+    ],
+    tab_names=[
+        "Voice Chat",
+        "Text Chat",
+    ],
+    title="Welcome to Chatty",
+    theme="base"
 )
 
 # Run the client
