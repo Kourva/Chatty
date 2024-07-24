@@ -161,3 +161,6 @@ parent_interface: TabbedInterface = TabbedInterface(
 # Run the client
 if __name__ == "__main__":
     chat_interface.launch()
+
+    gr.load("models/ehristoforu/dalle-3-xl-v2").launch()
+    gr.load("models/microsoft/Phi-3-mini-4k-instruct").launch()
