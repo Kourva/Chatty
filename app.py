@@ -143,7 +143,7 @@ with gr.Blocks() as image_interface:
             )
             submit_button = gr.Button("Submit")
 
-        user_output = gr..make_waveform(
+        user_output = gr.make_waveform(
             audio="mifr.mp3",
             bg_color="#313131",
             bars_color=("#ff55ff", "ff557f"),
