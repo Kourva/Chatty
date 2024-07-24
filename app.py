@@ -80,14 +80,12 @@ parent: ChatInterface = ChatInterface(
         avatar_images=("user.png", "chatbot.png"),
         bubble_full_width=False,
         layout="bubble",
-        elem_id="chatbot"
     ),
     submit_btn="ッ Ask",
     stop_btn="✕ Stop",
     retry_btn="⟲ Retry",
     undo_btn="⤾ Undo",
     clear_btn="≋ Clear",
-    css=util.css,
     additional_inputs=[
         gr.Textbox(
             value=util.system_message, 
