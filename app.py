@@ -82,18 +82,6 @@ def chat_process(prompt: str,
 parent: ChatInterface = ChatInterface(
     fn=chat_process,
     theme="base",
-    examples = [
-        [
-            {
-                "text": "Hy, who are you",
-            }
-        ],
-        [
-            {
-                "text": "Write Python fibonacci code",
-            }
-        ]
-    ],
     title="Chatty",
     description="Welcome to Chatty, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
     chatbot=gr.Chatbot(
