@@ -193,7 +193,9 @@ parent_interface: TabbedInterface = TabbedInterface(
     """
 )
 
+with gr.Blocks() as main:
+    TabbedInterface
 
 # Run the client
 if __name__ == "__main__":
-    parent_interface.launch()
+    main.launch()
