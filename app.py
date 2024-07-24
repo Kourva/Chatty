@@ -133,37 +133,6 @@ chat_interface: ChatInterface = ChatInterface(
     ],
 )
 
-# Image section interface
-with gr.Blocks() as image_interface:
-    gr.Markdown("Welcome to Imagy")
-    with gr.Column():
-        with gr.Row():
-            user_input = gr.Textbox(
-                placeholder="Enter your text"
-            )
-            submit_button = gr.Button("Submit")
-
-        user_output = gr.make_waveform(
-            audio="mifr.mp3",
-            bg_color="#313131",
-            bars_color=("#ff55ff", "ff557f"),
-            animate=True
-        )
-
-# Parent interface
-parent_interface: TabbedInterface = TabbedInterface(
-    interface_list=[
-        image_interface,
-        chat_interface
-    ],
-    tab_names=[
-        "Imagy",
-        "Chatty",
-    ],
-    title="Chatty",
-    theme="base"
-)
-
 # Run the client
 if __name__ == "__main__":
-    parent_interface.launch()
+    chat_interface.launch()
