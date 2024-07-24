@@ -97,7 +97,9 @@ def chat_process(prompt: str,
 chat_interface: ChatInterface = ChatInterface(
     fn=chat_process,
     theme="base",
-    title="Κσωshαπ ζερhyr ⍨",
+    title="ζερhyr ⍨",
+    fill_height=False,
+    fill_width=True,
     description="Welcome to Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
     chatbot=gr.Chatbot(
         placeholder="Ask me anything 👀",
@@ -127,7 +129,7 @@ chat_interface: ChatInterface = ChatInterface(
                 "Mistral-7B-Instruct-v0.3"
             ],
             value="zephyr-7b-beta",
-            label="Chat Client",
+            label="⌬ Chat Client",
             info="Choose your chat client! Default to Zephyr"
         ),
         gr.Slider(
