@@ -56,8 +56,6 @@ def chat_process(prompt: str,
         }
     )
 
-    # Initialize Zephyr response
-    response: str = ""
 
     # Switch case models
     match model:
