@@ -82,7 +82,7 @@ def chat_process(prompt: str,
 parent: ChatInterface = ChatInterface(
     fn=chat_process,
     theme="base",
-    title="Chatty",
+    title="<h1>Chatty</h1>",
     fill_height=False,
     description=util.description,
     chatbot=gr.Chatbot(
