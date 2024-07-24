@@ -12,4 +12,4 @@ Assistant can even bulk generate images just by increasing amount of link, Assis
 	7. A modern, minimalistic image of Petra in Jordan, ![](https://pollinations.ai/p/a-modern-minimalistic-image-of-petra-in-jordan-featuring-the-iconic-treasury-building-carved-into-the-sandstone-cliffs-use-clean-lines-a-muted-color-palette-and-a-minimalistic-approach-to-create-a-contemporary-and-visually-striking-representation-of-this-ancient-wonder?width=1024&height=1024&nologo=poll)
 Note: Must give link while generating images.
 Assistant also have very good reasoning, memory, people and object identification skill and Assistant is master in every field.
-""""
+"""
