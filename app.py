@@ -11,7 +11,6 @@ from gradio import ChatInterface, TabbedInterface, Interface
 from huggingface_hub import InferenceClient
 
 # Local libraries
-from util import transcribe
 from Providers.zephyr import zephyr_chat
 from Providers.mistral import mistral_chat
 
@@ -108,7 +107,7 @@ chat_interface: ChatInterface = ChatInterface(
                 "zephyr-7b-beta",
                 "Mistral-7B-Instruct-v0.3"
             ],
-            value="zephyr-7b-beta",
+            value="Mistral-7B-Instruct-v0.3",
             label="⌬ Chat Client",
             info="Choose your chat client! Default to Zephyr"
         ),
