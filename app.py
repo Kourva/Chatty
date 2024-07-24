@@ -99,7 +99,6 @@ chat_interface: ChatInterface = ChatInterface(
     theme="base",
     title="ζερhyr ⍨",
     description="Welcome to Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
-    chatbot=,
     submit_btn="ッ Ask",
     stop_btn="✕ Stop",
     retry_btn="⟲ Retry",
