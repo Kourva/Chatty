@@ -84,7 +84,6 @@ parent: ChatInterface = ChatInterface(
     theme="base",
     title="Chatty",
     fill_height=False,
-    examples=["hello", "hola", "merhaba"],
     description=util.description,
     chatbot=gr.Chatbot(
         placeholder="Ask me anything 👀",
