@@ -78,8 +78,8 @@ def chat_process(prompt: str,
 chat_interface: ChatInterface = ChatInterface(
     fn=chat_process,
     theme="base",
-    title="ζερhyr ⍨",
-    description="Welcome to Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
+    title="Text chat",
+    description="Welcome to Chatty, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
     chatbot=gr.Chatbot(
         placeholder="Ask me anything 👀",
         label="Zephyr chat 7b beta",
@@ -144,37 +144,12 @@ chat_interface: ChatInterface = ChatInterface(
     ],
 )
 
-with gr.Blocks() as voice:   
-    with gr.Row():
-        voice_input = gr.Audio(
-            label="Voice Chat", 
-            sources="microphone", 
-            type="filepath", 
-            waveform_options=True
-            )
-        voice_output = gr.Audio(
-            label="OpenGPT 4o", 
-            type="filepath",
-            interactive=False,
-            autoplay=True,
-            elem_classes="audio"
-        )
-        gr.Interface(
-            fn=respond, 
-            inputs=[voice_input],
-            outputs=[voice_output], 
-            live=True
-        )
-
-
 # Parent interface
 parent_interface: TabbedInterface = TabbedInterface(
     interface_list=[
-        voice_interface,
         chat_interface
     ],
     tab_names=[
-        "Voice Chat",
         "Text Chat",
     ],
     title="Welcome to Chatty",
