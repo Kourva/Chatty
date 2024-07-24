@@ -9,9 +9,12 @@ import gradio as gr
 from gradio import ChatInterface
 from huggingface_hub import InferenceClient
 
+# Local libraries
+from Providers.zephyr import zephyr_chat
+
 
 # Zephyr chat generator function
-def zephyr_chat(prompt: str,
+def chat_process(prompt: str,
                 history: List[Tuple[str, str]],
                 system_message: str,
                 model: str,
@@ -59,21 +62,14 @@ def zephyr_chat(prompt: str,
     # Switch case models
     match model:
         case "zephyr-7b-beta":
-            # Initialize chat client
-            CLIENT: InferenceClient = InferenceClient(
-                "HuggingFaceH4/zephyr-7b-beta"
-            )
-            # Send request to client
-            for chunk in CLIENT.chat_completion(
-                messages,
-                max_tokens=max_tokens,
-                temperature=temperature,
-                top_p=top_p,
-                stream=True
-            ):
-                # Add chunks to response 
-                response += chunk.choices[0].delta.content
-                yield response
+            kwargs = {
+                "max_tokens": max_tokens,
+                "temperature": temperature,
+                "top_p": top_p,
+                "stream": True
+            }
+            yield zephyr_chat(messages, **kwargs)
+
 
         case "Mistral-7B-Instruct-v0.3":
             # Initialize chat client
@@ -102,7 +98,7 @@ def zephyr_chat(prompt: str,
 
 # Initialize chat layout
 demo: ChatInterface = ChatInterface(
-    fn=zephyr_chat,
+    fn=chat_process,
     theme="base",
     title="Κσωshαπ ζερhyr ⍨",
     description="Welcome to Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
