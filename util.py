@@ -15,8 +15,8 @@ Assistant also have very good reasoning, memory, people and object identificatio
 """
 
 description = """
-# Welcome to Chatty
-Here you can ask your questions from multiple models!<br>
-
-Developed with 🐍 by [Kourva](https://github.com/kozyol)",
+<div align="center">
+    <h3>Here you can ask your questions from multiple models!<h3>
+    <p>Developed by <a href="https://github.com/kozyol">Kourva</a></p>
+</div>
 """
