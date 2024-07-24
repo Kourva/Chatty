@@ -13,8 +13,6 @@ from huggingface_hub import InferenceClient
 # Local libraries
 import util
 from Providers.zephyr import zephyr_chat
-from Providers.mistral import mistral_chat
-
 
 # Text chat function
 def chat_process(prompt: str,
@@ -61,20 +59,6 @@ def chat_process(prompt: str,
             }
             yield from zephyr_chat(messages, kwargs)
 
-        case "Mistral-7B-Instruct-v0.1":
-            kwargs = {
-                "max_new_tokens": max_tokens,
-                "top_p": top_p,
-                "temperature": temperature,
-                "repetition_penalty": repetition_penalty,
-                "do_sample": True,
-                "seed": 42,
-                "stream": True,
-                "details": True,
-                "return_full_text": False
-            }
-            yield from mistral_chat(messages, kwargs)
-
         case _:
             yield ""
 
@@ -114,8 +98,7 @@ parent: ChatInterface = ChatInterface(
         ),
         gr.Dropdown(
             choices=[
-                "zephyr-7b-beta",
-                "Mistral-7B-Instruct-v0.1"
+                "zephyr-7b-beta"
             ],
             value="zephyr-7b-beta",
             label="⌬ Chat Client",
