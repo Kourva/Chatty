@@ -102,6 +102,7 @@ parent: ChatInterface = ChatInterface(
     retry_btn="⟲ Retry",
     undo_btn="⤾ Undo",
     clear_btn="≋ Clear",
+    css=util.css,
     additional_inputs=[
         gr.Textbox(
             value=util.system_message, 
