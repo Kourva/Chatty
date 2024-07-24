@@ -68,7 +68,7 @@ def chat_process(prompt: str,
                 "top_p": top_p,
                 "stream": True
             }
-            yield zephyr_chat(messages, **kwargs)
+            return zephyr_chat(messages, **kwargs)
 
 
         case "Mistral-7B-Instruct-v0.3":
