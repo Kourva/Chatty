@@ -35,25 +35,17 @@ def chat_process(prompt: str,
     for val in history:
         if val[0]:
             messages.append(
-                {
-                    "role": "user", 
-                    "content": val[0]
-                }
+                {"role": "user", "content": val[0]}
             )
         if val[1]:
             messages.append(
-                {
-                    "role": "assistant", 
-                    "content": val[1]
-                }
+                {"role": "assistant", "content": val[1]}
             )
+
 
     # Add user prompt to message
     messages.append(
-        {
-            "role": "user",
-            "content": prompt
-        }
+        {"role": "user", "content": prompt}
     )
 
     # Switch case models
@@ -67,30 +59,8 @@ def chat_process(prompt: str,
             }
             yield from zephyr_chat(messages, kwargs)
 
-
-        case "Mistral-7B-Instruct-v0.3":
-            # Initialize chat client
-            CLIENT: InferenceClient = InferenceClient(
-                "mistralai/Mistral-7B-Instruct-v0.3"
-            )
-            # Send request to client
-            for chunk in CLIENT.text_generation(
-                messages,
-                temperature=temperature,
-                max_new_tokens=max_tokens,
-                top_p=top_p,
-                repetition_penalty=repetition_penalty,
-                do_sample=True,
-                seed=42,
-                stream=True, 
-                details=True, 
-                return_full_text=False
-            ):
-                response += chunk.token.text
-                yield response
-
         case _:
-            yield response
+            yield ""
 
 
 # Chat section interface
@@ -99,6 +69,16 @@ chat_interface: ChatInterface = ChatInterface(
     theme="base",
     title="ζερhyr ⍨",
     description="Welcome to Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
+    chatbot=gr.Chatbot(
+        placeholder="Ask me anything 👀",
+        label="Zephyr chat 7b beta",
+        show_label=True,
+        show_share_button=True,
+        show_copy_button=True,
+        avatar_images=("user.png", "chatbot.png"),
+        bubble_full_width=False,
+        layout="bubble"
+    ),
     submit_btn="ッ Ask",
     stop_btn="✕ Stop",
     retry_btn="⟲ Retry",
@@ -114,7 +94,6 @@ chat_interface: ChatInterface = ChatInterface(
         gr.Dropdown(
             choices=[
                 "zephyr-7b-beta",
-                "Mistral-7B-Instruct-v0.3"
             ],
             value="zephyr-7b-beta",
             label="⌬ Chat Client",
@@ -155,48 +134,30 @@ chat_interface: ChatInterface = ChatInterface(
 )
 
 # Image section interface
-image_interface: Interface = Interface(
-    lambda name: "Hello " + "name", "text", "text"
-)
+with gr.Blocks() as image_interface:
+    gr.Markdown("Welcome to Imagy")
+    with gr.Row():
+        with gr.Column(scale=1):
+            text1 = gr.Textbox()
+            text2 = gr.Textbox()
+        with gr.Column(scale=4):
+            btn1 = gr.Button("Button 1")
+            btn2 = gr.Button("Button 2")
 
 # Parent interface
 parent_interface: TabbedInterface = TabbedInterface(
     interface_list=[
-        # chat_interface,
-        image_interface
+        image_interface,
+        chat_interface
     ],
     tab_names=[
-        # "Chatty",
-        "Imagy"
+        "Imagy",
+        "Chatty",
     ],
     title="Chatty",
-    theme="base",
-    css="""
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-    }
-    """
+    theme="base"
 )
-
-with gr.Blocks() as main:
-    gr.Markdown("Welcome to Chatty App")
-    TabbedInterface
-    with gr.Row():
-        gr.Chatbot(
-            placeholder="Ask me anything 👀",
-            label="Zephyr chat 7b beta",
-            show_label=True,
-            show_share_button=True,
-            show_copy_button=True,
-            avatar_images=("user.png", "chatbot.png"),
-            bubble_full_width=False,
-            layout="bubble"
-        )
-    
 
 # Run the client
 if __name__ == "__main__":
-    main.launch()
+    parent_interface.launch()
