@@ -162,11 +162,11 @@ image_interface: Interface = Interface(
 # Parent interface
 parent_interface: TabbedInterface = TabbedInterface(
     interface_list=[
-        chat_interface,
+        # chat_interface,
         image_interface
     ],
     tab_names=[
-        "Chatty",
+        # "Chatty",
         "Imagy"
     ],
     title="Chatty",
