@@ -9,7 +9,7 @@ def zephyr_chat(messages, kwargs):
 
     # Initialize Zephyr response
     response: str = ""
-    
+
     # Send request to client
     for chunk in CLIENT.chat_completion(
         messages,
@@ -17,4 +17,4 @@ def zephyr_chat(messages, kwargs):
     ):
         # Add chunks to response 
         response += chunk.choices[0].delta.content
-    return response
+        yield response
