@@ -13,3 +13,10 @@ Assistant can even bulk generate images just by increasing amount of link, Assis
 Note: Must give link while generating images.
 Assistant also have very good reasoning, memory, people and object identification skill and Assistant is master in every field.
 """
+
+description = """
+# Welcome to Chatty
+Here you can ask your questions from multiple models!<br>
+
+Developed with 🐍 by [Kourva](https://github.com/kozyol)",
+"""
