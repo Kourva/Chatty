@@ -105,6 +105,7 @@ chat_interface: ChatInterface = ChatInterface(
         gr.Dropdown(
             choices=[
                 "zephyr-7b-beta",
+                "Mistral-7B-Instruct-v0.2"
             ],
             value="zephyr-7b-beta",
             label="⌬ Chat Client",
