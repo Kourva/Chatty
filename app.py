@@ -96,7 +96,7 @@ parent: ChatInterface = ChatInterface(
         avatar_images=("user.png", "chatbot.png"),
         bubble_full_width=False,
         layout="bubble",
-        elem_id="col_container"
+        elem_id="chatbot"
     ),
     submit_btn="ッ Ask",
     stop_btn="✕ Stop",
@@ -108,6 +108,7 @@ parent: ChatInterface = ChatInterface(
         gr.Textbox(
             value=util.system_message, 
             label="⌬ System message",
+            lines=5,
             info="You can set how your ChatGPT answer your question!",
             show_copy_button=True
         ),
