@@ -180,7 +180,15 @@ parent_interface: TabbedInterface = TabbedInterface(
         "Imagy"
     ],
     title="Chatty",
-    theme="base"
+    theme="base",
+    css="""
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+    }
+    """
 )
 
 
