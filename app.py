@@ -81,10 +81,10 @@ def chat_process(prompt: str,
 
 
 with gr.Blocks() as parent:
+    gt.Markdown("Text chat")
     ChatInterface(
         fn=chat_process,
         theme="base",
-        title="Text chat",
         description="Welcome to Chatty, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
         chatbot=gr.Chatbot(
             placeholder="Ask me anything 👀",
