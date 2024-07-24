@@ -86,9 +86,9 @@ parent: ChatInterface = ChatInterface(
     fn=chat_process,
     theme="base",
     examples = [
-        ["Who are you?"],
-        ["Recursive fibonacci in Python?"],
-        ["What is fprinf in C?"]
+        ["Who are you?",],
+        ["Recursive fibonacci in Python?",],
+        ["What is fprinf in C?",]
     ],
     title="Chatty",
     description="Welcome to Chatty, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
