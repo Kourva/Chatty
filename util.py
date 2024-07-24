@@ -26,9 +26,4 @@ css: str = """
     width: 100%;
     margin: 10px;
 }
-
-#chatbot {
-    height: 90%; 
-    overflow: auto;
-}
 """

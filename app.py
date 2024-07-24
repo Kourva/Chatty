@@ -95,7 +95,8 @@ parent: ChatInterface = ChatInterface(
         show_copy_button=True,
         avatar_images=("user.png", "chatbot.png"),
         bubble_full_width=False,
-        layout="bubble"
+        layout="bubble",
+        elem_id="col_container"
     ),
     submit_btn="ッ Ask",
     stop_btn="✕ Stop",
