@@ -83,13 +83,13 @@ def chat_process(prompt: str,
 with gr.Blocks() as parent:
     ChatInterface(
         fn=chat_process,
-        show_progress="Full",
         theme="base",
         title="Text chat",
         description="Welcome to Chatty, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
         chatbot=gr.Chatbot(
             placeholder="Ask me anything 👀",
             label="Zephyr chat 7b beta",
+            likeable=True,
             show_label=True,
             render=False,
             show_share_button=True,
