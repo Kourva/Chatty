@@ -98,19 +98,8 @@ chat_interface: ChatInterface = ChatInterface(
     fn=chat_process,
     theme="base",
     title="ζερhyr ⍨",
-    fill_height=False,
-    fill_width=True,
     description="Welcome to Zephyr Space, Here you can ask your questions from Zephyr!<br>Developed with 🐍 by Kourva (Kozyol)",
-    chatbot=gr.Chatbot(
-        placeholder="Ask me anything 👀",
-        label="Zephyr chat 7b beta",
-        show_label=True,
-        show_share_button=True,
-        show_copy_button=True,
-        avatar_images=("user.png", "chatbot.png"),
-        bubble_full_width=False,
-        layout="bubble"
-    ),
+    chatbot=,
     submit_btn="ッ Ask",
     stop_btn="✕ Stop",
     retry_btn="⟲ Retry",
@@ -194,7 +183,20 @@ parent_interface: TabbedInterface = TabbedInterface(
 )
 
 with gr.Blocks() as main:
+    gr.Markdown("Welcome to Chatty App")
     TabbedInterface
+    with gr.Row():
+        gr.Chatbot(
+            placeholder="Ask me anything 👀",
+            label="Zephyr chat 7b beta",
+            show_label=True,
+            show_share_button=True,
+            show_copy_button=True,
+            avatar_images=("user.png", "chatbot.png"),
+            bubble_full_width=False,
+            layout="bubble"
+        )
+    
 
 # Run the client
 if __name__ == "__main__":
