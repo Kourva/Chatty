@@ -16,4 +16,4 @@ def zephyr_chat(messages, **kwargs):
     ):
         # Add chunks to response 
         response += chunk.choices[0].delta.content
-        yield response
+    return response
