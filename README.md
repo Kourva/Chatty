@@ -1,6 +1,6 @@
 # Chatbot AI using Zephyr model from huggingface + API
 
-You can try web version of chat interface in huggingface: [Chatty](https://huggingface.co/spaces/Kozyol/Chatty)<br>
+You can try web version of chat interface in huggingface: [Chatty](https://huggingface.co/spaces/Kourva/Chatty)<br>
 You're welcome to duplicate and use the sources if you want to make one for yourself.
 
 # API Usage
@@ -17,7 +17,7 @@ You're welcome to duplicate and use the sources if you want to make one for your
    from gradio_client import Client
 
    # Initialize client
-   client = Client("Kozyol/Chatty")
+   client = Client("Kourva/Chatty")
 
    # Get response from client
    result = client.predict(
